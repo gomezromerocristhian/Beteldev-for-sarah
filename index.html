@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de rediseño — Odontología Sara Hincapié</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Arial&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A1220;
+    --ink-2:#111B2E;
+    --ink-line: rgba(255,255,255,.12);
+    --porcelain:#FAF8F4;
+    --porcelain-2:#F1EDE4;
+    --text:#0E1728;
+    --text-70: rgba(14,23,40,.68);
+    --text-50: rgba(14,23,40,.48);
+    --cobalt:#2C4EC4;
+    --cobalt-dark:#1F3A94;
+    --gold:#C6A667;
+    --gold-soft: rgba(198,166,103,.3);
+    --gold-dim: rgba(198,166,103,.14);
+    --pin:#B5472E;
+    --old-blue:#4E7FC7;
+    --old-gray:#D7DAE0;
+    --radius: 22px;
+    --ease: cubic-bezier(.16,.8,.24,1);
+    --easeSlow: cubic-bezier(.19,1,.22,1);
+  }
+  *{box-sizing:border-box;}
+  html,body{max-width:100%; overflow-x:hidden;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+  body{margin:0; background:var(--porcelain); color:var(--text); font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif; font-weight:500; letter-spacing:-0.01em; margin:0;}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--gold-soft);}
+  :focus-visible{outline:2px solid var(--cobalt); outline-offset:3px; border-radius:4px;}
+
+  .eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:700;}
+  .eyebrow::before{content:''; width:26px; height:1px; background:var(--gold); display:inline-block;}
+  .eyebrow.dark{color:var(--cobalt-dark);}
+  .eyebrow.dark::before{background:var(--cobalt);}
+
+  .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:17px 30px; border-radius:100px; font-weight:700; font-size:14.5px; cursor:pointer; border:1px solid transparent; transition:box-shadow .5s var(--ease), background .35s, color .35s, border-color .35s; white-space:nowrap;}
+  .btn-primary{background:var(--ink); color:var(--porcelain);}
+  .btn-primary:hover{box-shadow:0 18px 34px -12px rgba(10,18,32,.5);}
+  .btn-wa{background:#1FAE5C; color:#fff;}
+  .btn-wa:hover{box-shadow:0 18px 34px -12px rgba(31,174,92,.55);}
+  .btn-outline{background:transparent; color:var(--porcelain); border-color:rgba(255,255,255,.28);}
+  .btn-outline:hover{border-color:var(--gold); color:var(--gold);}
+  .btn-ghost{background:transparent; color:var(--text); border-color:rgba(14,23,40,.16);}
+  .btn-ghost:hover{border-color:var(--text);}
+  .magnetic{will-change:transform;}
+
+  /* ---------- dev banner (solo mientras faltan datos) ---------- */
+  #devBanner{position:fixed; left:0; right:0; bottom:0; z-index:999; background:#1a1200; color:#F5DFA0; font-size:13px; padding:12px 20px; text-align:center; font-weight:600; display:none;}
+  #devBanner span{color:#fff; text-decoration:underline;}
+
+  /* ---------- Nav ---------- */
+  header{position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,18,32,.0); transition:background .5s var(--ease), padding .5s var(--ease), border-color .5s var(--ease); border-bottom:1px solid transparent;}
+  header.scrolled{background:rgba(250,248,244,.86); backdrop-filter:blur(14px); padding:13px 0; border-color:rgba(14,23,40,.08);}
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .tag-confidential{font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:800; color:var(--porcelain); display:flex; align-items:center; gap:8px;}
+  header.scrolled .tag-confidential{color:var(--text);}
+  .tag-confidential i{width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block;}
+  .nav-cta{padding:11px 22px; font-size:13px;}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; padding:158px 0 80px; background:radial-gradient(120% 90% at 50% -10%, #16224A 0%, var(--ink) 55%, #060A12 100%); color:var(--porcelain); overflow:hidden;}
+  .hero::after{content:''; position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); pointer-events:none;}
+  .hero-inner{position:relative; z-index:2; max-width:820px;}
+  .hero h1{font-size:clamp(34px,5.4vw,62px); line-height:1.08; margin-top:22px;}
+  .hero h1 em{font-style:italic; color:var(--gold);}
+  .hero p.lead{margin-top:24px; font-size:17.5px; line-height:1.6; color:rgba(250,248,244,.72); max-width:600px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:36px;}
+
+  /* ---------- Compare (signature element) ---------- */
+  .compare-shell{margin-top:64px; position:relative;}
+  .compare-labels{display:flex; justify-content:space-between; margin-bottom:14px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; font-weight:800; color:rgba(250,248,244,.5);}
+  .compare-labels b{color:var(--gold);}
+  .compare{position:relative; width:100%; aspect-ratio:16/10; border-radius:20px; overflow:hidden; box-shadow:0 40px 80px -30px rgba(0,0,0,.6); cursor:ew-resize; user-select:none; border:1px solid rgba(255,255,255,.1);}
+  .browser-frame{position:absolute; inset:0; background:#fff; display:flex; flex-direction:column;}
+  .browser-bar{height:34px; background:#E7E5DF; display:flex; align-items:center; gap:6px; padding:0 12px; flex:none;}
+  .browser-bar i{width:9px; height:9px; border-radius:50%; background:#C7C4BC;}
+  .browser-content{flex:1; position:relative; overflow:hidden;}
+
+  /* BEFORE mock (plantilla genérica) */
+  .mock-before{font-family:Arial,Helvetica,sans-serif; height:100%; background:#fff; position:relative;}
+  .mb-nav{height:11%; background:var(--old-blue); display:flex; align-items:center; gap:5%; padding:0 4%;}
+  .mb-nav .logo{width:11%; height:38%; background:rgba(255,255,255,.9); border-radius:3px;}
+  .mb-nav .item{height:22%; background:rgba(255,255,255,.55); border-radius:2px;}
+  .mb-nav .item:nth-child(2){width:8%;} .mb-nav .item:nth-child(3){width:9%;} .mb-nav .item:nth-child(4){width:7%;} .mb-nav .item:nth-child(5){width:10%;} .mb-nav .item:nth-child(6){width:6%;}
+  .mb-hero{height:34%; background:linear-gradient(120deg,#5A8BD6,#3E6BB8); display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding:0 6%; gap:8px;}
+  .mb-hero .h{width:52%; height:14%; background:#fff; border-radius:2px;}
+  .mb-hero .s{width:38%; height:8%; background:rgba(255,255,255,.65); border-radius:2px;}
+  .mb-hero .b{margin-top:4%; width:20%; height:12%; background:#F2C230; border-radius:3px;}
+  .mb-icons{height:22%; display:flex; align-items:center; justify-content:space-around; padding:0 4%; background:#F4F4F2;}
+  .mb-icons .ic{width:15%; height:60%; border-radius:6px; background:#fff; border:1px solid var(--old-gray); display:flex; align-items:center; justify-content:center;}
+  .mb-icons .ic i{width:36%; height:36%; border-radius:50%; background:var(--old-blue); opacity:.5;}
+  .mb-strip{height:15%; background:#EDEDEA; display:flex; align-items:center; justify-content:center; gap:6px;}
+  .mb-strip .dot{width:6px; height:6px; border-radius:50%; background:var(--old-gray);}
+  .mb-strip .dot.on{background:var(--old-blue);}
+  .mb-foot{height:18%; background:#2B2E33;}
+  .pin{position:absolute; width:22px; height:22px; border-radius:50%; background:var(--pin); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 0 4px rgba(181,71,46,.22); z-index:5;}
+  .pin-tip{position:absolute; bottom:130%; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--porcelain); font-family:'Manrope',sans-serif; font-size:11.5px; font-weight:600; line-height:1.4; padding:9px 12px; border-radius:9px; width:168px; opacity:0; pointer-events:none; transition:opacity .25s ease; text-align:left;}
+  .pin:hover .pin-tip, .pin:focus-visible .pin-tip, .pin.active .pin-tip{opacity:1;}
+
+  /* AFTER mock (recreación simplificada del sitio nuevo) */
+  .mock-after{font-family:'Manrope',sans-serif; height:100%; background:var(--porcelain); position:relative; display:flex; flex-direction:column; justify-content:center; padding:7% 8%;}
+  .ma-eyebrow{font-size:9px; letter-spacing:.16em; text-transform:uppercase; font-weight:800; color:var(--gold); display:flex; align-items:center; gap:6px;}
+  .ma-eyebrow::before{content:''; width:16px; height:1px; background:var(--gold);}
+  .ma-h{font-family:'Fraunces',serif; font-weight:500; font-size:clamp(16px,2.6vw,30px); line-height:1.1; margin-top:10px; color:var(--ink); max-width:70%;}
+  .ma-h span{color:var(--gold); font-style:italic;}
+  .ma-sub{width:44%; height:5%; background:rgba(14,23,40,.15); border-radius:2px; margin-top:12px;}
+  .ma-btn{margin-top:16px; width:26%; height:9%; background:var(--ink); border-radius:100px;}
+  .ma-gold-line{position:absolute; right:6%; top:12%; width:1px; height:76%; background:linear-gradient(var(--gold-soft), transparent);}
+
+  .handle{position:absolute; top:0; bottom:0; width:44px; margin-left:-22px; display:flex; align-items:center; justify-content:center; cursor:ew-resize; touch-action:none; z-index:6;}
+  .handle::before{content:''; position:absolute; top:0; bottom:0; left:50%; width:2px; background:rgba(255,255,255,.9); box-shadow:0 0 0 1px rgba(0,0,0,.08);}
+  .handle-knob{width:46px; height:46px; border-radius:50%; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.28); display:flex; align-items:center; justify-content:center; gap:3px; position:relative; z-index:2;}
+  .handle-knob svg{width:13px; height:13px;}
+
+  /* ---------- Diagnóstico ---------- */
+  .diag{padding:110px 0; background:var(--porcelain-2);}
+  .diag-head{max-width:640px;}
+  .diag-head h2{font-size:clamp(26px,3.6vw,40px); margin-top:18px; line-height:1.16;}
+  .diag-grid{margin-top:56px; display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  .diag-card{background:var(--porcelain); border:1px solid rgba(14,23,40,.08); border-radius:var(--radius); padding:30px 28px;}
+  .diag-card .num{font-family:'Fraunces',serif; font-size:13px; font-weight:600; color:var(--pin); display:flex; align-items:center; gap:8px;}
+  .diag-card .num::before{content:''; width:16px; height:1px; background:var(--pin);}
+  .diag-card h3{font-size:19px; margin-top:14px; line-height:1.3;}
+  .diag-card p{margin-top:10px; font-size:14.5px; line-height:1.6; color:var(--text-70);}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .9s var(--easeSlow), transform .9s var(--easeSlow);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- Propuesta / features ---------- */
+  .features{padding:110px 0; background:var(--ink); color:var(--porcelain); position:relative; overflow:hidden;}
+  .features-head{max-width:620px;}
+  .features-head h2{font-size:clamp(26px,3.6vw,40px); margin-top:18px; line-height:1.16;}
+  .feat-grid{margin-top:56px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ink-line); border:1px solid var(--ink-line); border-radius:var(--radius); overflow:hidden;}
+  .feat-card{background:var(--ink-2); padding:30px 26px; transition:background .35s;}
+  .feat-card:hover{background:#152040;}
+  .feat-card svg{width:24px; height:24px; stroke:var(--gold); fill:none; stroke-width:1.6;}
+  .feat-card h3{font-size:16.5px; margin-top:18px; font-family:'Manrope',sans-serif; font-weight:700;}
+  .feat-card p{margin-top:8px; font-size:13.8px; line-height:1.6; color:rgba(250,248,244,.62);}
+
+  /* ---------- Preview CTA ---------- */
+  .preview{padding:110px 0; background:var(--porcelain);}
+  .preview-head{text-align:center; max-width:600px; margin:0 auto;}
+  .preview-head h2{font-size:clamp(26px,3.6vw,40px); margin-top:18px;}
+  .preview-frame{margin:52px auto 0; max-width:900px; border-radius:20px; overflow:hidden; box-shadow:0 40px 80px -30px rgba(14,23,40,.28); border:1px solid rgba(14,23,40,.08); position:relative;}
+  .preview-frame .browser-bar{background:var(--porcelain-2);}
+  .preview-frame .mock-after{aspect-ratio:16/8; padding:6% 9%;}
+  .preview-overlay{position:absolute; inset:0; background:rgba(10,18,32,.0); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .35s ease, background .35s ease;}
+  .preview-frame:hover .preview-overlay{opacity:1; background:rgba(10,18,32,.42);}
+  .preview-overlay .btn{transform:translateY(8px); transition:transform .35s ease;}
+  .preview-frame:hover .preview-overlay .btn{transform:translateY(0);}
+  .preview-cta-row{display:flex; justify-content:center; margin-top:30px;}
+
+  /* ---------- Planes ---------- */
+  .plans{padding:110px 0; background:var(--porcelain-2);}
+  .plans-head{max-width:640px;}
+  .plans-head h2{font-size:clamp(26px,3.6vw,40px); margin-top:18px;}
+  .plans-grid{margin-top:56px; display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch;}
+  .plan-card{background:var(--porcelain); border:1px solid rgba(14,23,40,.1); border-radius:var(--radius); padding:34px 28px; display:flex; flex-direction:column;}
+  .plan-card.reco{border-color:var(--gold); box-shadow:0 24px 50px -24px rgba(198,166,103,.4); position:relative;}
+  .plan-tag{position:absolute; top:-13px; left:28px; background:var(--gold); color:var(--ink); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:5px 12px; border-radius:100px;}
+  .plan-card h3{font-family:'Fraunces',serif; font-size:23px;}
+  .plan-card .plan-desc{margin-top:10px; font-size:13.8px; color:var(--text-70); line-height:1.55; min-height:56px;}
+  .plan-list{list-style:none; padding:0; margin:22px 0 0; display:flex; flex-direction:column; gap:11px; flex:1;}
+  .plan-list li{display:flex; gap:10px; font-size:13.8px; line-height:1.5; color:var(--text);}
+  .plan-list svg{width:16px; height:16px; flex:none; margin-top:2px; stroke:var(--cobalt); fill:none; stroke-width:2.4;}
+  .plan-card .btn{margin-top:26px; width:100%;}
+
+  /* ---------- Proceso ---------- */
+  .process{padding:110px 0; background:var(--porcelain);}
+  .process-head{max-width:600px;}
+  .process-head h2{font-size:clamp(26px,3.6vw,40px); margin-top:18px;}
+  .process-grid{margin-top:56px; display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .process-step .step-num{font-family:'Fraunces',serif; font-size:15px; color:var(--gold); font-weight:600;}
+  .process-step{padding-top:22px; border-top:1px solid rgba(14,23,40,.14);}
+  .process-step h3{font-size:16.5px; margin-top:12px;}
+  .process-step p{margin-top:8px; font-size:13.6px; line-height:1.55; color:var(--text-70);}
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{padding:130px 0; background:radial-gradient(120% 100% at 50% 110%, #16224A 0%, var(--ink) 55%, #060A12 100%); color:var(--porcelain); text-align:center; position:relative;}
+  .final-cta h2{font-size:clamp(30px,5vw,52px); line-height:1.12; max-width:760px; margin:20px auto 0;}
+  .final-cta p{margin:22px auto 0; max-width:480px; font-size:16px; color:rgba(250,248,244,.66); line-height:1.6;}
+  .final-cta .hero-ctas{justify-content:center; margin-top:38px;}
+
+  footer{padding:34px 0 100px; background:var(--ink); color:rgba(250,248,244,.4); font-size:12.5px;}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (max-width:860px){
+    .diag-grid{grid-template-columns:1fr;}
+    .feat-grid{grid-template-columns:1fr;}
+    .plans-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:1fr 1fr; row-gap:34px;}
+    .hero{padding-top:128px;}
+    .pin-tip{width:140px;}
+  }
+  @media (max-width:520px){
+    .process-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="devBanner">⚠ Faltan datos por configurar antes de enviar esta propuesta: <span id="devBannerList"></span>. Edítalos al final del archivo, en el bloque CONFIG.</div>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <span class="tag-confidential"><i></i> Propuesta comercial · Confidencial</span>
+      <a href="#" class="btn btn-wa nav-cta js-wa magnetic" aria-label="Contactar por WhatsApp">Hablemos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Para Odontología Sara Hincapié</span>
+      <h1>Tu sonrisa ya se diseña con precisión. <em>Tu sitio web todavía no.</em></h1>
+      <p class="lead">Rediseñé por completo tu presencia digital: misma marca, mismo estándar de estética premium que aplicas en consulta, ahora también en la pantalla de cada paciente que te busca por primera vez.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-outline js-site magnetic" target="_blank" rel="noopener">Ver el sitio nuevo completo</a>
+        <a href="#" class="btn btn-wa js-wa magnetic">Hablar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="wrap compare-shell reveal">
+      <div class="compare-labels"><span>Sitio actual</span><b>Arrastra para comparar →</b><span>Propuesta nueva</span></div>
+      <div class="compare" id="compare">
+        <div class="browser-frame">
+          <div class="browser-bar"><i></i><i></i><i></i></div>
+          <div class="browser-content">
+            <div class="mock-before" aria-hidden="true">
+              <div class="mb-nav">
+                <div class="logo"></div>
+                <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
+              </div>
+              <div class="mb-hero">
+                <div class="h"></div><div class="s"></div><div class="b"></div>
+              </div>
+              <div class="mb-icons">
+                <div class="ic"><i></i></div><div class="ic"><i></i></div><div class="ic"><i></i></div>
+              </div>
+              <div class="mb-strip"><span class="dot on"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="mb-foot"></div>
+
+              <button class="pin" style="top:16%; left:30%;" type="button" aria-label="Ver diagnóstico: menú saturado">1
+                <span class="pin-tip">Menú saturado, sin jerarquía — el paciente no sabe qué tocar primero.</span>
+              </button>
+              <button class="pin" style="top:42%; left:66%;" type="button" aria-label="Ver diagnóstico: plantilla genérica">2
+                <span class="pin-tip">Plantilla genérica de WordPress — cero identidad de marca propia.</span>
+              </button>
+              <button class="pin" style="top:80%; left:50%;" type="button" aria-label="Ver diagnóstico: sin cierre claro">3
+                <span class="pin-tip">Sin un cierre claro hacia la cita — la conversión se pierde al final.</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="browser-frame" id="afterLayer" style="clip-path:inset(0 0 0 50%);">
+          <div class="browser-bar"><i></i><i></i><i></i></div>
+          <div class="browser-content">
+            <div class="mock-after" aria-hidden="true">
+              <span class="ma-eyebrow">Diseño de sonrisa · Medellín</span>
+              <h3 class="ma-h">Carilla por <span>carilla</span>, precisión que se ve.</h3>
+              <div class="ma-sub"></div>
+              <div class="ma-btn"></div>
+              <div class="ma-gold-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="handle" id="handle" tabindex="0" role="slider" aria-label="Deslizar comparación" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="handle-knob">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0A1220" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0A1220" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="diag">
+    <div class="wrap">
+      <div class="diag-head reveal">
+        <span class="eyebrow dark">Diagnóstico</span>
+        <h2>Lo que tu sitio le dice hoy a un paciente nuevo.</h2>
+      </div>
+      <div class="diag-grid">
+        <div class="diag-card reveal">
+          <span class="num">01</span>
+          <h3>No transmite el nivel de tu consulta.</h3>
+          <p>Alguien que busca "diseño de sonrisa" espera algo tan cuidado como el resultado que ofreces. Una plantilla genérica lo pone en duda antes de escribirte.</p>
+        </div>
+        <div class="diag-card reveal">
+          <span class="num">02</span>
+          <h3>No hay una acción clara.</h3>
+          <p>Sin un recorrido guiado hacia "agendar valoración", cada paciente tiene que decidir por su cuenta qué hacer — y la mayoría simplemente se va.</p>
+        </div>
+        <div class="diag-card reveal">
+          <span class="num">03</span>
+          <h3>No hay prueba visual del trabajo.</h3>
+          <p>Tu diferencial es el resultado estético. Si el sitio no lo muestra de forma inmediata y comparable, ese diferencial no está compitiendo por ti.</p>
+        </div>
+        <div class="diag-card reveal">
+          <span class="num">04</span>
+          <h3>La experiencia en celular no acompaña.</h3>
+          <p>La mayoría de tus pacientes te van a encontrar desde el teléfono, camino a otra cosa. Cada fricción de más ahí es una cita que no se agenda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="wrap">
+      <div class="features-head reveal">
+        <span class="eyebrow">La propuesta</span>
+        <h2>Todo lo que tu marca necesitaba y todavía no tenía.</h2>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><path d="M8 3v18M16 3v18M3 12h18"/></svg>
+          <h3>Comparador antes / después</h3>
+          <p>El mismo recurso que acabas de usar arriba, aplicado a tus casos reales: la forma más directa de demostrar resultados.</p>
+        </div>
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>
+          <h3>Ficha de cada servicio</h3>
+          <p>Ortodoncia, blanqueamiento, odontología general: cada uno con su propia explicación en un clic, sin saturar la página principal.</p>
+        </div>
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+          <h3>Mobile-first de verdad</h3>
+          <p>Diseñado empezando por el celular, no adaptado después. Cada botón, cada texto, pensado para el pulgar de quien te busca en la calle.</p>
+        </div>
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg>
+          <h3>Carga rápida</h3>
+          <p>Imágenes optimizadas y código limpio. Cada segundo de espera de más es un paciente que se va antes de ver tu trabajo.</p>
+        </div>
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <h3>SEO técnico + datos locales</h3>
+          <p>Preparado para aparecer cuando alguien busca "diseño de sonrisa" o "carillas" en Medellín, no solo cuando escribe tu nombre.</p>
+        </div>
+        <div class="feat-card reveal">
+          <svg viewBox="0 0 24 24"><path d="M12 2C9 2 7 4 7 7c0 4 1 6 1 9a2 2 0 0 0 4 0c0-2 0-3 1-3s1 1 1 3a2 2 0 0 0 4 0c0-3 1-5 1-9 0-3-2-5-5-5"/></svg>
+          <h3>Una identidad, no una plantilla</h3>
+          <p>Paleta, tipografía y tono elegidos para tu marca — nada que se vea igual en la clínica de al lado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="preview">
+    <div class="wrap">
+      <div class="preview-head reveal">
+        <span class="eyebrow dark">Vista previa</span>
+        <h2>Esto es apenas un fragmento. El sitio completo se ve así.</h2>
+      </div>
+      <a href="#" class="preview-frame reveal js-site" target="_blank" rel="noopener" aria-label="Abrir el sitio nuevo completo">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <div class="mock-after" aria-hidden="true">
+          <span class="ma-eyebrow">Odontología estética · Medellín</span>
+          <h3 class="ma-h">Tu <span>nueva</span> primera impresión.</h3>
+          <div class="ma-sub"></div>
+          <div class="ma-btn"></div>
+          <div class="ma-gold-line"></div>
+        </div>
+        <div class="preview-overlay">
+          <span class="btn btn-primary">Ver el sitio completo</span>
+        </div>
+      </a>
+      <div class="preview-cta-row">
+        <a href="#" class="btn btn-wa js-wa magnetic">Prefiero que me lo muestres por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans">
+    <div class="wrap">
+      <div class="plans-head reveal">
+        <span class="eyebrow dark">Planes</span>
+        <h2>Elige el alcance. La inversión la conversamos según lo que necesites.</h2>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <h3>Esencial</h3>
+          <p class="plan-desc">Una landing de una sola página, con tu antes/después como protagonista. Ideal para salir del sitio actual rápido.</p>
+          <ul class="plan-list">
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Diseño a la medida de tu marca</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Comparador antes/después</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Botón directo a WhatsApp</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Mobile-first</li>
+          </ul>
+          <a href="#" class="btn btn-ghost js-wa-plan" data-plan="Esencial">Cotizar este plan</a>
+        </div>
+        <div class="plan-card reco reveal">
+          <span class="plan-tag">Recomendado</span>
+          <h3>Signature</h3>
+          <p class="plan-desc">El sitio completo que acabas de ver: multi-sección, ficha por servicio, testimonios y agenda directa.</p>
+          <ul class="plan-list">
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Todo lo del plan Esencial</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Fichas interactivas por servicio</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Sección de testimonios y proceso</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>SEO local + datos estructurados</li>
+          </ul>
+          <a href="#" class="btn btn-primary js-wa-plan" data-plan="Signature">Cotizar este plan</a>
+        </div>
+        <div class="plan-card reveal">
+          <h3>Premium White-Glove</h3>
+          <p class="plan-desc">Todo lo anterior, más dirección de fotografía, copywriting de marca y mantenimiento mensual.</p>
+          <ul class="plan-list">
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Todo lo del plan Signature</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Dirección de fotografía/contenido</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Copywriting de marca</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-11"/></svg>Mantenimiento y ajustes mensuales</li>
+          </ul>
+          <a href="#" class="btn btn-ghost js-wa-plan" data-plan="Premium White-Glove">Cotizar este plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="wrap">
+      <div class="process-head reveal">
+        <span class="eyebrow dark">Cómo trabajamos</span>
+        <h2>De aquí a tu sitio publicado.</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="step-num">01</span>
+          <h3>Diagnóstico y objetivos</h3>
+          <p>Conversamos qué quieres lograr y confirmamos alcance y plan.</p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">02</span>
+          <h3>Diseño de marca</h3>
+          <p>Ajusto la identidad visual y la estructura sobre lo que ya viste.</p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">03</span>
+          <h3>Desarrollo y contenido</h3>
+          <p>Construyo el sitio con tus fotos, servicios y testimonios reales.</p>
+        </div>
+        <div class="process-step reveal">
+          <span class="step-num">04</span>
+          <h3>Lanzamiento y ajuste</h3>
+          <p>Publicamos, revisamos en tus dispositivos y afinamos detalles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <span class="eyebrow">Siguiente paso</span>
+      <h2>¿Hablamos de tu nuevo sitio?</h2>
+      <p>Diez minutos por WhatsApp bastan para definir el alcance y arrancar.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-wa js-wa magnetic">Escribir por WhatsApp</a>
+        <a href="#" class="btn btn-outline js-site magnetic" target="_blank" rel="noopener">Volver a ver el sitio</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Propuesta confidencial preparada para Odontología Sara Hincapié.</span>
+    <span id="footDate"></span>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     CONFIG — edita estos 3 valores antes de enviar la propuesta
+     ============================================================ */
+  const CONFIG = {
+    WHATSAPP_NUMBER: '', // ej: '573001234567' (con código de país, sin + ni espacios)
+    NEW_SITE_URL: '',    // ej: 'https://odontologiasarah-nuevo.vercel.app'
+    WHATSAPP_MESSAGE: 'Hola, vi la propuesta del nuevo sitio web y quiero conversar.'
+  };
+
+  // Fecha en el footer
+  document.getElementById('footDate').textContent = new Date().toLocaleDateString('es-CO', {year:'numeric', month:'long', day:'numeric'});
+
+  // Aplica CONFIG a todos los enlaces
+  function applyConfig(){
+    const missing = [];
+    const waNumber = CONFIG.WHATSAPP_NUMBER.trim();
+    const siteUrl = CONFIG.NEW_SITE_URL.trim();
+    if(!waNumber) missing.push('WHATSAPP_NUMBER');
+    if(!siteUrl) missing.push('NEW_SITE_URL');
+
+    document.querySelectorAll('.js-wa').forEach(el=>{
+      el.href = waNumber ? `https://wa.me/${waNumber}?text=${encodeURIComponent(CONFIG.WHATSAPP_MESSAGE)}` : '#';
+    });
+    document.querySelectorAll('.js-wa-plan').forEach(el=>{
+      const plan = el.dataset.plan;
+      const msg = `Hola, vi la propuesta y me interesa el plan ${plan}. ¿Hablamos?`;
+      el.href = waNumber ? `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}` : '#';
+    });
+    document.querySelectorAll('.js-site').forEach(el=>{
+      el.href = siteUrl || '#';
+    });
+
+    if(missing.length){
+      const banner = document.getElementById('devBanner');
+      document.getElementById('devBannerList').textContent = missing.join(', ');
+      banner.style.display = 'block';
+    }
+  }
+  applyConfig();
+
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Magnetic buttons
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove', (e)=>{
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2;
+      const y = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${x*0.25}px, ${y*0.45}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=>{ btn.style.transform = 'translate(0,0)'; });
+  });
+
+  // Before/after draggable compare
+  const compare = document.getElementById('compare');
+  const afterLayer = document.getElementById('afterLayer');
+  const handle = document.getElementById('handle');
+  let dragging = false;
+
+  function setPos(clientX){
+    const rect = compare.getBoundingClientRect();
+    let x = ((clientX - rect.left) / rect.width) * 100;
+    x = Math.max(4, Math.min(96, x));
+    afterLayer.style.clipPath = `inset(0 0 0 ${x}%)`;
+    handle.style.left = x + '%';
+    handle.setAttribute('aria-valuenow', Math.round(x));
+  }
+  handle.addEventListener('pointerdown', (e)=>{ dragging = true; handle.setPointerCapture(e.pointerId); e.preventDefault(); });
+  window.addEventListener('pointermove', (e)=>{ if(dragging){ setPos(e.clientX); e.preventDefault(); } }, {passive:false});
+  window.addEventListener('pointerup', ()=>{ dragging = false; });
+  compare.addEventListener('click', (e)=>{ if(e.target.closest('.pin')) return; setPos(e.clientX); });
+  compare.addEventListener('touchmove', (e)=>{ if(dragging) e.preventDefault(); }, {passive:false});
+  handle.addEventListener('keydown', (e)=>{
+    const rect = compare.getBoundingClientRect();
+    const current = parseFloat(handle.style.left) || 50;
+    if(e.key === 'ArrowLeft'){ setPos(rect.left + rect.width*(current-4)/100); }
+    if(e.key === 'ArrowRight'){ setPos(rect.left + rect.width*(current+4)/100); }
+  });
+
+  // Diagnostic pins (tap to toggle on touch devices)
+  document.querySelectorAll('.pin').forEach(pin=>{
+    pin.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      document.querySelectorAll('.pin.active').forEach(p=>{ if(p!==pin) p.classList.remove('active'); });
+      pin.classList.toggle('active');
+    });
+  });
+</script>
+
+</body>
+</html>
