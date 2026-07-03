@@ -53,8 +53,11 @@
   .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:17px 30px; border-radius:100px; font-weight:700; font-size:14.5px; cursor:pointer; border:1px solid transparent; transition:box-shadow .5s var(--ease), background .35s, color .35s, border-color .35s; white-space:nowrap;}
   .btn-primary{background:var(--ink); color:var(--porcelain);}
   .btn-primary:hover{box-shadow:0 18px 34px -12px rgba(10,18,32,.5);}
-  .btn-wa{background:#1FAE5C; color:#fff;}
-  .btn-wa:hover{box-shadow:0 18px 34px -12px rgba(31,174,92,.55);}
+  .btn-wa{background:var(--ink); color:var(--porcelain); border-color:var(--gold-soft);}
+  .btn-wa:hover{border-color:var(--gold); box-shadow:0 18px 34px -12px rgba(10,18,32,.5);}
+  .btn-wa svg{width:16px; height:16px; flex:none;}
+  header.scrolled .btn-wa{border-color:rgba(14,23,40,.16);}
+  header.scrolled .btn-wa:hover{border-color:var(--gold);}
   .btn-outline{background:transparent; color:var(--porcelain); border-color:rgba(255,255,255,.28);}
   .btn-outline:hover{border-color:var(--gold); color:var(--gold);}
   .btn-ghost{background:transparent; color:var(--text); border-color:rgba(14,23,40,.16);}
@@ -72,6 +75,7 @@
   .tag-confidential{font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:800; color:var(--porcelain); display:flex; align-items:center; gap:8px;}
   header.scrolled .tag-confidential{color:var(--text);}
   .tag-confidential i{width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block;}
+  .credit-nav{opacity:.65; font-weight:700;}
   .nav-cta{padding:11px 22px; font-size:13px;}
 
   /* ---------- Hero ---------- */
@@ -115,6 +119,9 @@
   .pin:hover .pin-tip, .pin:focus-visible .pin-tip, .pin.active .pin-tip{opacity:1;}
 
   /* AFTER mock (recreación simplificada del sitio nuevo) */
+  .mock-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; display:block;}
+  .mock-after .mock-photo{z-index:1;}
+  .mock-after-fallback{position:relative; z-index:0; height:100%; display:flex; flex-direction:column; justify-content:center; padding:7% 8%;}
   .mock-after{font-family:'Manrope',sans-serif; height:100%; background:var(--porcelain); position:relative; display:flex; flex-direction:column; justify-content:center; padding:7% 8%;}
   .ma-eyebrow{font-size:9px; letter-spacing:.16em; text-transform:uppercase; font-weight:800; color:var(--gold); display:flex; align-items:center; gap:6px;}
   .ma-eyebrow::before{content:''; width:16px; height:1px; background:var(--gold);}
@@ -201,6 +208,8 @@
 
   footer{padding:34px 0 100px; background:var(--ink); color:rgba(250,248,244,.4); font-size:12.5px;}
   footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  footer .credit{color:rgba(250,248,244,.55);}
+  footer .credit b{color:var(--gold); font-weight:700;}
 
   @media (max-width:860px){
     .diag-grid{grid-template-columns:1fr;}
@@ -213,6 +222,7 @@
   @media (max-width:520px){
     .process-grid{grid-template-columns:1fr;}
     .wrap{padding:0 20px;}
+    .credit-nav{display:none;}
   }
 </style>
 </head>
@@ -223,8 +233,8 @@
 <header id="siteHeader">
   <div class="wrap">
     <nav>
-      <span class="tag-confidential"><i></i> Propuesta comercial · Confidencial</span>
-      <a href="#" class="btn btn-wa nav-cta js-wa magnetic" aria-label="Contactar por WhatsApp">Hablemos</a>
+      <span class="tag-confidential"><i></i> Propuesta comercial · Confidencial · <span class="credit-nav">by Betel Dev</span></span>
+      <a href="#" class="btn btn-wa nav-cta js-wa magnetic" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5l-1.4 5.09 5.28-1.38a9.9 9.9 0 0 0 4.71 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.13-2.9-7C17.05 3.03 14.6 2 12.04 2Zm5.8 14.16c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.1-1.8-.11a16.3 16.3 0 0 1-1.7-.63c-3-1.29-4.96-4.32-5.11-4.52-.15-.2-1.22-1.63-1.22-3.1s.77-2.2 1.04-2.5c.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.51.24.6.83 2.06.9 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.44.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.13.07.72-.17 1.4Z"/></svg>Hablemos</a>
     </nav>
   </div>
 </header>
@@ -237,7 +247,7 @@
       <p class="lead">Rediseñé por completo tu presencia digital: misma marca, mismo estándar de estética premium que aplicas en consulta, ahora también en la pantalla de cada paciente que te busca por primera vez.</p>
       <div class="hero-ctas">
         <a href="#" class="btn btn-outline js-site magnetic" target="_blank" rel="noopener">Ver el sitio nuevo completo</a>
-        <a href="#" class="btn btn-wa js-wa magnetic">Hablar por WhatsApp</a>
+        <a href="#" class="btn btn-wa js-wa magnetic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5l-1.4 5.09 5.28-1.38a9.9 9.9 0 0 0 4.71 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.13-2.9-7C17.05 3.03 14.6 2 12.04 2Zm5.8 14.16c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.1-1.8-.11a16.3 16.3 0 0 1-1.7-.63c-3-1.29-4.96-4.32-5.11-4.52-.15-.2-1.22-1.63-1.22-3.1s.77-2.2 1.04-2.5c.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.51.24.6.83 2.06.9 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.44.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.13.07.72-.17 1.4Z"/></svg>Hablar por WhatsApp</a>
       </div>
     </div>
 
@@ -248,6 +258,10 @@
           <div class="browser-bar"><i></i><i></i><i></i></div>
           <div class="browser-content">
             <div class="mock-before" aria-hidden="true">
+              <!-- FOTO 1: captura de pantalla del sitio ACTUAL de la clínica.
+                   Sube el archivo "screenshot-actual.jpg" a la misma carpeta que este HTML.
+                   Si el archivo no existe, se ve automáticamente el mockup genérico de abajo. -->
+              <img class="mock-photo" src="screenshot-actual.jpg" alt="Captura del sitio web actual de la clínica" onerror="this.style.display='none'">
               <div class="mb-nav">
                 <div class="logo"></div>
                 <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
@@ -278,11 +292,16 @@
           <div class="browser-bar"><i></i><i></i><i></i></div>
           <div class="browser-content">
             <div class="mock-after" aria-hidden="true">
-              <span class="ma-eyebrow">Diseño de sonrisa · Medellín</span>
-              <h3 class="ma-h">Carilla por <span>carilla</span>, precisión que se ve.</h3>
-              <div class="ma-sub"></div>
-              <div class="ma-btn"></div>
-              <div class="ma-gold-line"></div>
+              <!-- FOTO 2: captura del sitio NUEVO (sección hero / diseño de sonrisa).
+                   Sube "screenshot-nuevo.jpg" a la misma carpeta. Fallback automático si falta. -->
+              <img class="mock-photo" src="screenshot-nuevo.jpg" alt="Captura del nuevo sitio web — sección de diseño de sonrisa" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <div class="mock-after-fallback" style="display:none;">
+                <span class="ma-eyebrow">Diseño de sonrisa · Medellín</span>
+                <h3 class="ma-h">Carilla por <span>carilla</span>, precisión que se ve.</h3>
+                <div class="ma-sub"></div>
+                <div class="ma-btn"></div>
+                <div class="ma-gold-line"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -378,18 +397,23 @@
       <a href="#" class="preview-frame reveal js-site" target="_blank" rel="noopener" aria-label="Abrir el sitio nuevo completo">
         <div class="browser-bar"><i></i><i></i><i></i></div>
         <div class="mock-after" aria-hidden="true">
-          <span class="ma-eyebrow">Odontología estética · Medellín</span>
-          <h3 class="ma-h">Tu <span>nueva</span> primera impresión.</h3>
-          <div class="ma-sub"></div>
-          <div class="ma-btn"></div>
-          <div class="ma-gold-line"></div>
+          <!-- FOTO 3: captura de página completa del sitio NUEVO.
+               Sube "screenshot-nuevo-completo.jpg" a la misma carpeta. Fallback automático si falta. -->
+          <img class="mock-photo" src="screenshot-nuevo-completo.jpg" alt="Vista previa completa del nuevo sitio web" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="mock-after-fallback" style="display:none;">
+            <span class="ma-eyebrow">Odontología estética · Medellín</span>
+            <h3 class="ma-h">Tu <span>nueva</span> primera impresión.</h3>
+            <div class="ma-sub"></div>
+            <div class="ma-btn"></div>
+            <div class="ma-gold-line"></div>
+          </div>
         </div>
         <div class="preview-overlay">
           <span class="btn btn-primary">Ver el sitio completo</span>
         </div>
       </a>
       <div class="preview-cta-row">
-        <a href="#" class="btn btn-wa js-wa magnetic">Prefiero que me lo muestres por WhatsApp</a>
+        <a href="#" class="btn btn-wa js-wa magnetic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5l-1.4 5.09 5.28-1.38a9.9 9.9 0 0 0 4.71 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.13-2.9-7C17.05 3.03 14.6 2 12.04 2Zm5.8 14.16c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.1-1.8-.11a16.3 16.3 0 0 1-1.7-.63c-3-1.29-4.96-4.32-5.11-4.52-.15-.2-1.22-1.63-1.22-3.1s.77-2.2 1.04-2.5c.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.51.24.6.83 2.06.9 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.44.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.13.07.72-.17 1.4Z"/></svg>Prefiero que me lo muestres por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -476,7 +500,7 @@
       <h2>¿Hablamos de tu nuevo sitio?</h2>
       <p>Diez minutos por WhatsApp bastan para definir el alcance y arrancar.</p>
       <div class="hero-ctas">
-        <a href="#" class="btn btn-wa js-wa magnetic">Escribir por WhatsApp</a>
+        <a href="#" class="btn btn-wa js-wa magnetic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 5l-1.4 5.09 5.28-1.38a9.9 9.9 0 0 0 4.71 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.13-2.9-7C17.05 3.03 14.6 2 12.04 2Zm5.8 14.16c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.1-1.8-.11a16.3 16.3 0 0 1-1.7-.63c-3-1.29-4.96-4.32-5.11-4.52-.15-.2-1.22-1.63-1.22-3.1s.77-2.2 1.04-2.5c.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.51.24.6.83 2.06.9 2.21.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.44.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.34.07.13.07.72-.17 1.4Z"/></svg>Escribir por WhatsApp</a>
         <a href="#" class="btn btn-outline js-site magnetic" target="_blank" rel="noopener">Volver a ver el sitio</a>
       </div>
     </div>
@@ -486,6 +510,7 @@
 <footer>
   <div class="wrap">
     <span>Propuesta confidencial preparada para Odontología Sara Hincapié.</span>
+    <span class="credit">Diseñado y desarrollado por <b>Betel Dev</b></span>
     <span id="footDate"></span>
   </div>
 </footer>
@@ -495,8 +520,8 @@
      CONFIG — edita estos 3 valores antes de enviar la propuesta
      ============================================================ */
   const CONFIG = {
-    WHATSAPP_NUMBER: '', // ej: '573001234567' (con código de país, sin + ni espacios)
-    NEW_SITE_URL: '',    // ej: 'https://odontologiasarah-nuevo.vercel.app'
+    WHATSAPP_NUMBER: '573502715786', // Betel Dev
+    NEW_SITE_URL: 'https://odontologia-sarah.vercel.app/',
     WHATSAPP_MESSAGE: 'Hola, vi la propuesta del nuevo sitio web y quiero conversar.'
   };
 
